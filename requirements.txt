@@ -1,10 +1,7 @@
-streamlit==1.40.1
-opencv-python==4.10.0.84
-ultralytics==8.3.33
-cvzone==1.6.1
-pillow==10.4.0
-symspellpy==6.7.8
-numpy==1.26.0
-libgl1-mesa-glx
-libglib2.0-0
-
+streamlit==1.21.0  # Stable version compatible with Python 3.12
+opencv-python==4.10.0.84  # Stable version that works with Python 3.12
+ultralytics==8.3.33  # Latest version compatible with Python 3.12
+cvzone==1.6.1  # Compatible with Python 3.12
+pillow==10.4.0  # Compatible with Python 3.12
+symspellpy==6.7.8  # Compatible with Python 3.12
+numpy==1.23.5  # Compatible with Python 3.12
