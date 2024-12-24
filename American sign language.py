@@ -8,7 +8,7 @@ import cvzone
 from PIL import Image
 
 # Load YOLO model
-model = YOLO(r"D:\Dataset for internships\YOLO pre trained weights\Video call ASL.pt")
+model = YOLO("Video call ASL.pt")
 
 # Class names for ASL detection
 classNames = [
@@ -17,7 +17,7 @@ classNames = [
 ]
 
 # Load phrase mappings from JSON file
-phrase_file_path = r"C:\Users\user\Downloads\phrase_mappings.json"
+phrase_file_path = "phrase_mappings.json"
 try:
     with open(phrase_file_path, 'r') as file:
         phrase_mappings = json.load(file)
