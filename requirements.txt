@@ -1,7 +1,6 @@
 streamlit==1.22.0
 opencv-python==4.8.0.74
 opencv-python-headless==4.8.0.74
-ultralytics==8.0.31
-cvzone==1.5.8
-Pillow==9.5.0
-numpy==1.24.3
+cvzone==1.5.7  # Use a compatible version
+ultralytics==8.0.61  # Use the available latest version of YOLOv8
+torch==2.1.0  # Add PyTorch version suitable for YOLOv8
