@@ -7,14 +7,6 @@ import time
 import cvzone
 from PIL import Image
 
-# Install headless OpenCV for deployment
-try:
-    import cv2
-except ImportError:
-    import os
-    os.system('pip install opencv-python-headless')
-    import cv2
-
 # Load YOLO model
 model = YOLO("Video call ASL.pt")
 
