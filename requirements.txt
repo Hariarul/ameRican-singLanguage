@@ -1,5 +1,5 @@
 streamlit==1.32.0
-opencv-python==4.9.0.80
+opencv-python-headless==4.9.0.80
 opencv-contrib-python==4.9.0.80
 torch==2.4.1
 torchvision==0.19.1
