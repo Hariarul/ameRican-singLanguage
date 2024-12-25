@@ -1,5 +1,6 @@
 streamlit==1.32.0
-opencv-python-headless==4.9.0.80
+opencv-python==4.10.0.84
+opencv-contrib-python==4.10.0.84
 torch==2.4.1
 torchvision==0.19.1
 ultralytics==8.3.33
@@ -11,4 +12,3 @@ seaborn==0.13.2
 mediapipe==0.10.20
 numpy==1.26.0
 requests==2.31.0
-libgl1
