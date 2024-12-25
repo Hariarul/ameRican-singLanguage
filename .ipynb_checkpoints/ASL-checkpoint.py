@@ -6,6 +6,7 @@ import json
 import time
 import cvzone
 from PIL import Image
+import tempfile
 
 # Load YOLO model
 model = YOLO("Video call ASL.pt")
@@ -62,7 +63,12 @@ if input_option == "Webcam":
 elif input_option == "Upload Video":
     uploaded_file = st.sidebar.file_uploader("Upload Video (Drag or Select)", type=["mp4", "avi", "mov"])
     if uploaded_file:
-        cap = cv2.VideoCapture(uploaded_file)  # Load the uploaded video file
+        # Save the uploaded video file to a temporary location
+        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+            temp_file.write(uploaded_file.read())
+            temp_file_path = temp_file.name
+        
+        cap = cv2.VideoCapture(temp_file_path)  # Load the uploaded video file from temp file
         st.sidebar.write(f"Video selected: {uploaded_file.name}")
     else:
         st.sidebar.write("Drag or select a video file to upload.")
