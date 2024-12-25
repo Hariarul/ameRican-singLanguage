@@ -47,11 +47,15 @@ input_option = st.sidebar.radio("Select Input Source", ("Webcam", "Upload Video"
 
 cap = None  # Initialize cap variable
 
+# Try to initialize the webcam if selected
 if input_option == "Webcam":
     start_button = st.sidebar.button("Start Camera")
     if start_button:
         st.sidebar.write("📹 Camera started!")
-        cap = cv2.VideoCapture(0)  # Access webcam
+        cap = cv2.VideoCapture(0)  # Try to access webcam
+        if not cap.isOpened():
+            st.error("Webcam could not be accessed. Please try uploading a video file instead.")
+            cap = None
     else:
         st.sidebar.write("Click 'Start Camera' to begin using the webcam.")
 
@@ -141,7 +145,7 @@ if cap:
                     word_buffer += detected_letter
                     frame_count = 0
 
-                cvzone.cornerRect(imgOutput, (x1, y1, x2 - x1, y2 - y1), l=25, colorR=(255, 0, 255), colorC=(255, 255, 255), t=5,rt=0) 
+                cvzone.cornerRect(imgOutput, (x1, y1, x2 - x1, y2 - y1), l=25, colorR=(255, 0, 255), colorC=(255, 255, 255), t=5, rt=0) 
                 cv2.putText(
                     imgOutput,
                     f'{detected_letter} {max_confidence:.2f}',
