@@ -7,6 +7,9 @@ import time
 import cvzone
 from PIL import Image
 
+# Use opencv-python-headless to avoid GUI-related issues
+# pip install opencv-python-headless==4.5.1.48
+
 # Load YOLO model
 model = YOLO("Video call ASL.pt")
 
@@ -142,8 +145,8 @@ if cap:
                     word_buffer += detected_letter
                     frame_count = 0
 
-                cv2.rectangle(imgOutput, (x1, y1), (x2, y2), (255, 0, 255), 3)
-                #cvzone.cornerRect(imgOutput, (x1, y1, x2 - x1, y2 - y1), l=25, colorR=(255, 0, 255), colorC=(255, 255, 255), t=5, rt=0) 
+                # Draw rectangle and text without requiring GUI
+                cvzone.cornerRect(imgOutput, (x1, y1, x2 - x1, y2 - y1), l=25, colorR=(255, 0, 255), colorC=(255, 255, 255), t=5,rt=0) 
                 cv2.putText(
                     imgOutput,
                     f'{detected_letter} {max_confidence:.2f}',
