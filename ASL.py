@@ -43,7 +43,6 @@ st.title("📹 ASL Detection System")
 
 # Sidebar Configuration for Input Source
 st.sidebar.header("Input Source Options")
-# Using buttons for webcam and file upload selection
 input_option = st.sidebar.radio("Select Input Source", ("Webcam", "Upload Video"))
 
 cap = None  # Initialize cap variable
@@ -59,7 +58,7 @@ if input_option == "Webcam":
 elif input_option == "Upload Video":
     uploaded_file = st.sidebar.file_uploader("Upload Video (Drag or Select)", type=["mp4", "avi", "mov"])
     if uploaded_file:
-        cap = cv2.VideoCapture(uploaded_file.name)  # Load the uploaded video file
+        cap = cv2.VideoCapture(uploaded_file)  # Load the uploaded video file
         st.sidebar.write(f"Video selected: {uploaded_file.name}")
     else:
         st.sidebar.write("Drag or select a video file to upload.")
@@ -142,7 +141,6 @@ if cap:
                     word_buffer += detected_letter
                     frame_count = 0
 
-               
                 cvzone.cornerRect(imgOutput, (x1, y1, x2 - x1, y2 - y1), l=25, colorR=(255, 0, 255), colorC=(255, 255, 255), t=5,rt=0) 
                 cv2.putText(
                     imgOutput,
