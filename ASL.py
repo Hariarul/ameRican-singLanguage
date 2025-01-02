@@ -7,6 +7,10 @@ import time
 import cvzone
 from PIL import Image
 import tempfile
+import warnings
+
+# Suppress deprecation warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 # Load YOLO model
 model = YOLO("Video call ASL.pt")
@@ -26,14 +30,16 @@ except FileNotFoundError:
     st.error(f"The file {phrase_file_path} was not found.")
     phrase_mappings = {}
 
-# Function to check time-based restrictions (allowing until 2 AM)
+# Function to check time-based restrictions (allowing from 6 PM to 10 PM)
 def is_prediction_allowed():
     current_time = datetime.now().time()
-    start_time = datetime.strptime("08:00:00", "%H:%M:%S").time()
-    end_time = datetime.strptime("02:00:00", "%H:%M:%S").time()
+    
+    # Start and end times
+    start_time = datetime.strptime("18:00:00", "%H:%M:%S").time()  # 6 PM
+    end_time = datetime.strptime("22:00:00", "%H:%M:%S").time()  # 10 PM
 
-    # Check if current time is between 8:00 AM and 2:00 AM the next day
-    if start_time <= current_time or current_time <= end_time:
+    # Check if current time is between 6:00 PM and 10:00 PM
+    if start_time <= current_time <= end_time:
         return True
     else:
         return False
@@ -164,7 +170,7 @@ if cap:
 
         # If predictions are not allowed, show message on screen
         if not is_prediction_allowed():
-            current_sign_placeholder.markdown("### 🚫 Predictions are not allowed at this time. Allowed from 8 AM to 2 AM.")
+            current_sign_placeholder.markdown("### 🚫 Predictions are not allowed at this time. Allowed from 6 PM to 10 PM.")
 
         if time.time() - last_detected_time > word_confirmation_timeout and word_buffer:
             valid_words.append(word_buffer.strip())
@@ -185,7 +191,7 @@ if cap:
         # Convert frame to RGB for Streamlit
         frame_rgb = cv2.cvtColor(imgOutput, cv2.COLOR_BGR2RGB)
         frame_pil = Image.fromarray(frame_rgb)
-        frame_placeholder.image(frame_pil, caption="Live ASL Detection", use_column_width=True)
+        frame_placeholder.image(frame_pil, caption="Live ASL Detection", use_container_width=True)
 
     cap.release()
 else:
